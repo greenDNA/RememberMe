@@ -1,0 +1,46 @@
+Silly application with user authentication, login logout that allows 
+users to list colors they like and retrieve that information from a 
+database so that it is dynamic
+
+Landing Page
+
+    Welcome to application page 
+    Sign in - Sign up
+    Navigation bar
+        About us, contact us, more about application/why use application
+    Advertisements
+
+Sign up
+    Form that asks for Name, email, password, phone number
+    User chooses encryption method they would like used on their account security
+        Explain what each option does
+    New user inserted into database
+    Thank user for signing up
+    Send email to confirm user account
+
+Sign in/Session
+    Form that asks for email or phone number, and password
+    Compare to database of users and perform authentication check
+    Use 'loader' with css so user has visual feedback while they wait for account access
+
+Application
+    User decides to add information to their account
+        A color, food, activity, job, etc.
+        Displays colors in a sequence on screen
+        As profile information lists details about the user
+    Logout/Session
+        Disassociate machine with account and delete any information or files like 'cookies' that may store information about user
+
+Pages
+    Fill out information, can use lorem ipsum
+
+
+Technologies
+    MongoDB
+    Express
+    Ejs
+    Body-parser
+    Bootstrap
+    Passport
+    cookies
+    dot-env
