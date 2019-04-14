@@ -1,3 +1,23 @@
+/**
+ * @ALERT_SERIOUS
+ * When working with passport, you must have the field being taken from an html form via body-parser be named
+ * "username", any other name from "username" will result in "bad request" error after running
+ * passport.authenticate() from within mongoose.model.register() function
+ * Frustrating, have to google and search for answers and read documentation for
+ * passport, passport-local, passport-local-mongoose, express-session
+ * read documentation for the above ^^^
+ * 
+ * Saw this error in terminal
+ * { MissingUsernameError: No username was given
+    at Promise.resolve.then (/home/trayvont/Development/Websites/RememberMe/node_modules/passport-local-mongoose/index.js:232:17)
+  name: 'MissingUsernameError',
+  message: 'No username was given' }
+ * I did supply a username, it just wouldnt acknowledge it for some reason
+ * I submitted {username: req.body.name/email/userName}
+ * If I don't submit {username: username} it gives an error
+ * 
+ */
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
@@ -7,12 +27,11 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 
-
 const app = express();
 
-app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
-app.use(methodOverride("_method"));
+app.set('view engine', 'ejs');
+//app.use(methodOverride("_method"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -37,7 +56,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(passportLocalMongoose);
 
-const User = mongoose.model("User", userSchema);
+const User = new mongoose.model("User", userSchema);
 
 
 passport.use(User.createStrategy());
@@ -78,22 +97,16 @@ app.get("/profile", function(req, res){
 })
 
 app.post("/signup", function(req, res){
-    console.log(req.body.userEmail, req.body.userPassword);
-    User.register({username: req.body.userEmail}, req.body.userPassword, function(err, user){
-        console.log("in register");
+
+    User.register({username: req.body.username}, req.body.password, function(err, user){
         if(err){
-            console.log("error exists");
             console.log(err);
             res.redirect('/signup');
         } else {
-            console.log("in else block");
             passport.authenticate("local")(req, res, function(){
-                console.log("before redirect");
-                res.redirect('/');
-                console.log("after redirect");
+                res.redirect('/profile');
                 //   res.send("User found");
             });
-            console.log("after authenticate");
         }
     })
 });
@@ -103,8 +116,8 @@ app.get("/login", function(req, res){
 });
 
 app.post("/login", function(req, res){
-    const email = req.body.userEmail;
-    const password = req.body.userPassword;
+    const email = req.body.username;
+    const password = req.body.password;
 
     User.findOne({email: email}, function(err, foundUser){
         if(err){
