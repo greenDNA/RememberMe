@@ -12,6 +12,7 @@ Landing Page
 
 Sign up
     Form that asks for Name, email, password, phone number
+    Checks if information is available for use in signup(email/phone not in database)
     User chooses encryption method they would like used on their account security
         Explain what each option does
     New user inserted into database

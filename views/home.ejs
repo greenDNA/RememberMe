@@ -6,22 +6,23 @@
     <title>RememberMe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-    <script src=""></script>
 </head>
 <body>
-    
     <h1>RememberMe</h1>
-    
     <div>
         <div class="num1">
             <p>
-                <a href="signup">Link to signup!</a>
-
+                <a href="/signup">Link to signup!</a>
             </p>
         </div>
-
-
     </div>
 
+    <h2>Users</h2>
+
+    <ul>
+    <% list.forEach( item => { %>
+        <li> <%= item %> </li>
+    <% }); %>  
+    </ul>
 </body>
 </html>
