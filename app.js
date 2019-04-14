@@ -91,13 +91,12 @@ app.get("/profile", function(req, res){
     if(req.isAuthenticated()){
         res.render("profile");
     } else {
-        //res.redirect("/login");
-        res.send("Redirected from profile");
+        res.redirect("/login");
     }
 })
 
 app.post("/signup", function(req, res){
-
+    //username must be used in both fields, bug? bad request otherwise
     User.register({username: req.body.username}, req.body.password, function(err, user){
         if(err){
             console.log(err);
@@ -115,21 +114,42 @@ app.get("/login", function(req, res){
     res.render("login");
 });
 
-app.post("/login", function(req, res){
-    const email = req.body.username;
-    const password = req.body.password;
+app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+})
 
-    User.findOne({email: email}, function(err, foundUser){
+app.post("/login", function(req, res){
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
+
+    req.login(user, function(err){
         if(err){
             console.log(err);
         } else {
-            if(foundUser.password === password){
-                res.send("<h1>Found user successfully</h1>");
-            } else {
-                res.send("<h1>User was not found</h1>");
-            }
+            passport.authenticate("local")(req, res, function(){
+                res.redirect("/profile");
+            });
         }
     });
+
+
+    // const email = req.body.username;
+    // const password = req.body.password;
+
+    // User.findOne({email: email}, function(err, foundUser){
+    //     if(err){
+    //         console.log(err);
+    //     } else {
+    //         if(foundUser.password === password){
+    //             res.send("<h1>Found user successfully</h1>");
+    //         } else {
+    //             res.send("<h1>User was not found</h1>");
+    //         }
+    //     }
+    // });
 });
 
 app.listen(3000, function(){
