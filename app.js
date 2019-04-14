@@ -30,10 +30,9 @@ app.get("/", function(req, res){
             console.log(err);
         } else {
             users.forEach(user => {
-                //console.log(user);
+                console.log(user);
                 userList.push(user);
             });
-            console.log(userList);
             res.render('home', {list: userList});
         }
     });
@@ -63,6 +62,29 @@ app.post("/signup", function(req, res){
     user.save();
 
     res.send("<h1>Thank you for signing up!</h1>");
+});
+
+app.get("/login", function(req, res){
+
+    res.render("login");
+});
+
+app.post("/login", function(req, res){
+    const email = req.body.userEmail;
+    const password = req.body.userPassword;
+
+    User.findOne({email: email, password: password}, function(err, user){
+        if(err){
+            console.log(err);
+        } else {
+            if(user){
+                res.send("<h1>Found user successfully</h1>");
+            } else {
+                res.send("<h1>User was not found</h1>");
+            }
+        }
+    });
+    // res.send("Login Page Results");
 });
 
 app.listen(3000, function(){
