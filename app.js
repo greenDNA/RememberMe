@@ -87,13 +87,22 @@ app.get("/signup", function(req, res){
     res.render('signup');
 });
 
+app.get("/login", function(req, res){
+    res.render("login");
+});
+
+app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+});
+
 app.get("/profile", function(req, res){
     if(req.isAuthenticated()){
-        res.render("profile");
+        res.render("profile", {username: req.user.username});
     } else {
         res.redirect("/login");
     }
-})
+});
 
 app.post("/signup", function(req, res){
     //username must be used in both fields, bug? bad request otherwise
@@ -109,15 +118,6 @@ app.post("/signup", function(req, res){
         }
     })
 });
-
-app.get("/login", function(req, res){
-    res.render("login");
-});
-
-app.get("/logout", function(req, res){
-    req.logout();
-    res.redirect("/");
-})
 
 app.post("/login", function(req, res){
     const user = new User({
