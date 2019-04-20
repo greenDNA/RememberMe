@@ -3,7 +3,16 @@ h1 {
 }
 
 .num1 {
-    width: 100px;
-    height: 100px;
     background-color: aqua;
+}
+
+.container {
+    display: flex;
+    height: 500px;
+    width: 500px;
+}
+
+.form-row {
+    flex-wrap: nowrap;
+    margin: auto;
 }
