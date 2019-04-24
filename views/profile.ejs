@@ -12,11 +12,19 @@
     <h1>RememberMe</h1>
     <h2>Profile</h2>
 
-    <h3>My name is <%=username%>!</h3>
+    <h3>My name is <%=user.username%>!</h3>
 
     <!-- Page for displaying user dynamic remembered information -->
 
     <p><a href="/">Go home</a></p>
     <p><a href="/logout">Logout</a></p>
+
+    <h1><%=user%></h1>
+
+    <form action="/profile" method="POST">
+        <label for="">Update Bio: </label>
+        <input type="text" name="bio" id="">
+        <button type="submit">Update</button>
+    </form>
 </body>
 </html>

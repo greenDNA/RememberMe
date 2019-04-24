@@ -56,7 +56,8 @@ mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
     email: String,
-    password: String
+    password: String,
+    bio: String
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -103,7 +104,7 @@ app.get("/logout", function(req, res){
 
 app.get("/profile", function(req, res){
     if(req.isAuthenticated()){
-        res.render("profile", {username: req.user.username});
+        res.render("profile", {user: req.user});
     } else {
         res.redirect("/login");
     }
@@ -139,25 +140,31 @@ app.post("/login", function(req, res){
             });
         }
     });
+});
 
+app.post("/profile", function(req, res){
+    const submittedBio = req.body.bio;
 
-    // const email = req.body.username;
-    // const password = req.body.password;
-
-    // User.findOne({email: email}, function(err, foundUser){
-    //     if(err){
-    //         console.log(err);
-    //     } else {
-    //         if(foundUser.password === password){
-    //             res.send("<h1>Found user successfully</h1>");
-    //         } else {
-    //             res.send("<h1>User was not found</h1>");
-    //         }
-    //     }
-    // });
+    User.findById(req.user.id, function(err, foundUser){
+        if(err){
+            console.log(err);
+        } else {
+            if(foundUser){
+                if(submittedBio == ''){
+                    foundUser.bio = null;
+                } else {
+                    foundUser.bio = submittedBio;
+                }
+                foundUser.save(function(){
+                    res.redirect("/profile");
+                });
+            }
+        }
+    });
 });
 
 let port = process.env.PORT;
+
 if(port == null || port == ""){
     port = 3000;
 }
