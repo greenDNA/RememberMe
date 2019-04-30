@@ -16,6 +16,9 @@
  * I submitted {username: req.body.name/email/userName}
  * If I don't submit {username: username} it gives an error
  * 
+ * 
+ * @Note
+ * Setting a field to equal 'undefined' will remove it from displaying when console.log is performed
  */
 
 const express = require('express');
@@ -57,7 +60,9 @@ mongoose.set("useCreateIndex", true);
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
-    bio: String
+    bio: String,
+    name: String,
+    phone: Number
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -143,15 +148,21 @@ app.post("/login", function(req, res){
 });
 
 app.post("/profile", function(req, res){
-    const submittedBio = req.body.bio;
+    const submittedBio = req.body.bio; // Rename this to submittedUpdate or so
+    const button = req.body.biobutton;
+    
+    const updater = req.body.updateSelector; // Uses select and option tags to decide which field to update for a user
+
+    console.log(button);
+    console.log(updater);
 
     User.findById(req.user.id, function(err, foundUser){
         if(err){
             console.log(err);
         } else {
             if(foundUser){
-                if(submittedBio == ''){
-                    foundUser.bio = null;
+                if(submittedBio == ''){ // Rename submittedBio ti submittedUpdate or so
+                    foundUser.bio = undefined; // Setting to undefined removes the value, and 'hides' data from displaying
                 } else {
                     foundUser.bio = submittedBio;
                 }

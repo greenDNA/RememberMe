@@ -23,8 +23,26 @@
 
     <form action="/profile" method="POST">
         <label for="">Update Bio: </label>
-        <input type="text" name="bio" id="">
-        <button type="submit">Update</button>
+        <select name="updateSelector" id="">
+                <option value="bio">Bio</option>
+                <option value="phone">Phone</option>
+                <option value="name">Name</option>
+        </select>
+        <input type="text" name="bio" id="" placeholder="Enter value or leave blank to clear saved data">
+        <button type="submit" name="biobutton">Update</button>
+
+        
+
+        <!--How to signal which profile data to update by choosing a button or another form of submission
+        Maybe use a dropdown menu to select one profile data option, and have that name dynamically sorted out
+        in Javascript. I think that is easiest.
+
+        A <select> tag used in a form.
+
+        Do I manage this by inserting an array into the mongo schema?
+
+        And separate profile data array from profile settings array/account personalization settings
+        -->
     </form>
 </body>
 </html>
