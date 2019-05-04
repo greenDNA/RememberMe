@@ -154,17 +154,24 @@ app.post("/profile", function(req, res){
     const updater = req.body.updateSelector; // Uses select and option tags to decide which field to update for a user
 
     console.log(button);
-    console.log(updater);
+    console.log(updater); // value of select option menu here
 
     User.findById(req.user.id, function(err, foundUser){
         if(err){
             console.log(err);
         } else {
             if(foundUser){
-                if(submittedBio == ''){ // Rename submittedBio ti submittedUpdate or so
-                    foundUser.bio = undefined; // Setting to undefined removes the value, and 'hides' data from displaying
-                } else {
-                    foundUser.bio = submittedBio;
+                if(updater === 'bio'){
+                    console.log('in bio selector');
+                    if(submittedBio == ''){ // Rename submittedBio ti submittedUpdate or so
+                        foundUser.bio = undefined; // Setting to undefined removes the value, and 'hides' data from displaying
+                    } else {
+                        foundUser.bio = submittedBio;
+                    }
+                } else if (updater === 'phone'){
+                    console.log('in phone selector');
+                } else if (updater === 'name'){
+                    console.log('in name selector');
                 }
                 foundUser.save(function(){
                     res.redirect("/profile");
