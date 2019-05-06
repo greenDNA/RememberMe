@@ -9,6 +9,9 @@
 </head>
 <body>
     <h1>RememberMe</h1>
+    <% if(user){ %>
+        <h2>Welcome back, <%= user.username %></h2>
+    <% } %>
     <div>
         <div class="num1">
             <p>
@@ -19,6 +22,9 @@
             </p>
             <p>
                 <a href="/profile">Link to profile!</a>
+            </p>
+            <p>
+                <a href="/logout">Link to logout!</a>
             </p>
         </div>
     </div>

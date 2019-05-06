@@ -87,7 +87,8 @@ app.get("/", function(req, res){
                 console.log(user);
                 userList.push(user);
             });
-            res.render('home', {list: userList});
+            console.log(req.user);
+            res.render('home', {list: userList, user: req.user});
         }
     });
 
