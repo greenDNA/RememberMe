@@ -148,7 +148,7 @@ app.post("/login", function(req, res){
 });
 
 app.post("/profile", function(req, res){
-    const submittedBio = req.body.bio; // Rename this to submittedUpdate or so
+    const submitted = req.body.traitUpdater; // Rename this to submittedUpdate or so
     const button = req.body.biobutton;
     
     const updater = req.body.updateSelector; // Uses select and option tags to decide which field to update for a user
@@ -163,15 +163,25 @@ app.post("/profile", function(req, res){
             if(foundUser){
                 if(updater === 'bio'){
                     console.log('in bio selector');
-                    if(submittedBio == ''){ // Rename submittedBio ti submittedUpdate or so
+                    if(submitted == ''){ // Rename submittedBio ti submittedUpdate or so
                         foundUser.bio = undefined; // Setting to undefined removes the value, and 'hides' data from displaying
                     } else {
-                        foundUser.bio = submittedBio;
+                        foundUser.bio = submitted;
                     }
                 } else if (updater === 'phone'){
                     console.log('in phone selector');
+                    if(submitted == ''){ // Rename submittedBio ti submittedUpdate or so
+                        foundUser.phone = undefined; // Setting to undefined removes the value, and 'hides' data from displaying
+                    } else {
+                        foundUser.phone = submitted;
+                    }
                 } else if (updater === 'name'){
                     console.log('in name selector');
+                    if(submitted == ''){ // Rename submittedBio ti submittedUpdate or so
+                        foundUser.name = undefined; // Setting to undefined removes the value, and 'hides' data from displaying
+                    } else {
+                        foundUser.name = submitted;
+                    }
                 }
                 foundUser.save(function(){
                     res.redirect("/profile");
