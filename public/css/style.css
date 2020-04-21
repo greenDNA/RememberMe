@@ -1,18 +1,4 @@
-h1 {
-    color: red;
+body {
+    background-color: blanchedalmond;
 }
 
-.num1 {
-    background-color: aqua;
-}
-
-.container {
-    display: flex;
-    height: 500px;
-    width: 500px;
-}
-
-.form-row {
-    flex-wrap: nowrap;
-    margin: auto;
-}

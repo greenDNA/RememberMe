@@ -5,33 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>RememberMe - Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css">
     <script src=""></script>
 </head>
 <body>
-    <h1>RememberMe</h1>
-    <h2>Profile</h2>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">RememberMe.js</a>
+        <ul class="navbar-nav ml-auto navbar-dark">
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">Link to signup</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Link to login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">Link to profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Link to logout</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+    <h2 style="display: inline-block;">Profile - </h2>
 
-    <h3>My name is <%=user.username%>!</h3>
+    <h3 style="display: inline-block;">My name is <%=user.name%>!</h3>
 
     <!-- Page for displaying user dynamic remembered information -->
 
-    <p><a href="/">Go home</a></p>
-    <p><a href="/logout">Logout</a></p>
-
-    <h1><%=user%></h1>
-
+    <div class="card">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Name: <%=user%></li>
+            <li class="list-group-item">Bio: <%=user.bio%></li>
+            <li class="list-group-item">Phone: <%=user.phone%></li>
+        </ul>
+    </div>
+    <h1>
+        Make Changes to Profile Below
+    </h1>
     <form action="/profile" method="POST">
         <!-- <label for="">Update Bio: </label> -->
-        <select name="updateSelector" id="">
+        <div class="form-group ">
+            <div class="input-group">            
+            <select class="custom-select form-control" name="updateSelector" id="">
                 <option value="bio">Bio</option>
                 <option value="phone">Phone</option>
                 <option value="name">Name</option>
-        </select>
-        <input type="text" name="traitUpdater" id="" placeholder="Enter value or leave blank to clear saved data">
-        <button type="submit" name="biobutton">Update</button>
-
-        
+            </select>
+            <input class="form-control" type="text" name="traitUpdater" id="" placeholder="Enter value or leave blank to clear saved data">
+        </div>
+        </div>
+        <button class="btn btn-dark btn-block" type="submit" name="biobutton">Update</button>
 
         <!--How to signal which profile data to update by choosing a button or another form of submission
         Maybe use a dropdown menu to select one profile data option, and have that name dynamically sorted out
@@ -44,5 +70,14 @@
         And separate profile data array from profile settings array/account personalization settings
         -->
     </form>
+    <h1>
+        ID: <%=user._id%>
+    </h1>
+    <h2>Email: <%=user.username%></h2>
+
+    </div> <!-- End of container div -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
