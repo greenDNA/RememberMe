@@ -1,41 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>RememberMe - Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css">
-    <script src=""></script>
-</head>
-<body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">RememberMe.js</a>
-        <ul class="navbar-nav ml-auto navbar-dark">
-            <li class="nav-item">
-                <a class="nav-link" href="/signup">Link to signup</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Link to login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile">Link to profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Link to logout</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="container">
-    <h2 style="display: inline-block;">Profile - </h2>
+<%- include('partials/header.ejs') %>
 
-    <h3 style="display: inline-block;">My name is <%=user.name%>!</h3>
+    <div class="container mt-5">
+    <h2 class="display-4 mb-3">Profile - My name is <u><%=user.name%></u>!</h2>
 
     <!-- Page for displaying user dynamic remembered information -->
 
-    <div class="card">
+    <div class="card mb-5">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Name: <%=user%></li>
             <li class="list-group-item">Bio: <%=user.bio%></li>
@@ -76,8 +46,4 @@
     <h2>Email: <%=user.username%></h2>
 
     </div> <!-- End of container div -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+<%- include('partials/footer.ejs') %>
