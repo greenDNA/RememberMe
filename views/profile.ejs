@@ -6,9 +6,10 @@
 
     <div class="card mb-5">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Name: <%=user%></li>
+            <li class="list-group-item">Name: <%=user.name%></li>
             <li class="list-group-item">Bio: <%=user.bio%></li>
             <li class="list-group-item">Phone: <%=user.phone%></li>
+            <li class="list-group-item">Note: <%=user.note%></li>
         </ul>
     </div>
     <h1>
@@ -18,15 +19,18 @@
         <!-- <label for="">Update Bio: </label> -->
         <div class="form-group ">
             <div class="input-group">            
-            <select class="custom-select form-control" name="updateSelector" id="">
+            <select class="custom-select form-control col-3" name="updateSelector" id="">
                 <option value="bio">Bio</option>
                 <option value="phone">Phone</option>
                 <option value="name">Name</option>
+                <option value="note">Note</option>
             </select>
-            <input class="form-control" type="text" name="traitUpdater" id="" placeholder="Enter value or leave blank to clear saved data">
+            <!-- <input class="form-control" type="text" name="traitUpdater" id="" placeholder="Enter value or leave blank to clear saved data"> -->
+            <textarea class="col-9" name="traitUpdater"></textarea>
         </div>
         </div>
-        <button class="btn btn-dark btn-block" type="submit" name="biobutton">Update</button>
+        <!-- <button class="btn btn-dark btn-block" type="submit" name="biobutton">Update</button> -->
+        <button class="btn btn-primary" type="submit" name="biobutton">Update Profile</button>
 
         <!--How to signal which profile data to update by choosing a button or another form of submission
         Maybe use a dropdown menu to select one profile data option, and have that name dynamically sorted out

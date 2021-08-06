@@ -62,7 +62,8 @@ const userSchema = new mongoose.Schema({
     password: String,
     bio: String,
     name: String,
-    phone: Number
+    phone: Number,
+    note: String
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -135,7 +136,8 @@ app.post("/signup", function(req, res){
  * Error when user enters incorrect login information
  * How to handle that situation?
  */
-app.post("/login", function(req, res){
+app.post("/login", passport.authenticate('local'), function(req, res){
+    console.log(req.body.username, req.body.password);
     const user = new User({
         username: req.body.username,
         password: req.body.password
@@ -190,6 +192,13 @@ app.post("/profile", function(req, res){
                         foundUser.name = undefined; // Setting to undefined removes the value, and 'hides' data from displaying
                     } else {
                         foundUser.name = submitted;
+                    }
+                } else if (updater === 'note'){
+                    console.log('in note selector');
+                    if(submitted == ''){
+                        foundUser.note = undefined;
+                    } else {
+                        foundUser.note = submitted;
                     }
                 }
                 foundUser.save(function(){

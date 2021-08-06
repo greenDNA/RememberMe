@@ -12,13 +12,19 @@
 
     <!-- list -->
 
-    <h2>Users Submissions</h2>
+    <h2 class="text-center">Users Submissions</h2>
     <br>
-    <div class="card mb-5">
+    <div class="mb-5">
         <ul class="list-group list-group-flush">
             <div class="row">
                 <% list.forEach( item => { %>
-                    <li class="list-group-item col-4"> <%= item %> </li>
+                    <li class="list-group-item col-5 border border-dark ml-auto mr-auto mb-3"> 
+                        <!-- <p><%= item %> </p> -->
+                        <p>Username: <%= item.username %> </p>
+                        <p>Bio: <%= item.bio %> </p>
+                        <p>Name: <%= item.name %></p>
+                        <p>Note: <%= item.note %></p>
+                    </li>
                 <% }); %>  
             </div>
         </ul>
